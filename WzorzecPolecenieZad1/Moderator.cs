@@ -6,13 +6,22 @@ using System.Threading.Tasks;
 
 namespace WzorzecPolecenieZad1
 {
-    //Polecenie (Invoker): W tym przypadku, klasa Moderator jest obiektem wykonującym polecenia. Ma możliwość zatwierdzania lub odrzucania komentarzy.
-    //moderacja automatyczna jezeli jest jakies słowo post usuwany albo jakies info 
+
     public class Moderator
     {
-        public void ProcessComment(ICommand command)
+        private List<ICommand> commands = new List<ICommand>();
+
+        public void AddCommand (ICommand command)
         {
+            commands.Add(command);
+        }
+
+        public void ProcessComment()
+        {
+            foreach( var command in commands)
+            {
             command.Execute();
+            }
         }
     }
 }
